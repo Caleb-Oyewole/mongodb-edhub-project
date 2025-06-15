@@ -1,16 +1,61 @@
 {
-    "students_schema": {
+    "courses": {
         "$jsonSchema": {
             "bsonType": "object",
             "required": [
-                "student_id",
-                "name",
-                "email",
-                "joined_on",
-                "status"
+                "course_id",
+                "title",
+                "description",
+                "instructor_id",
+                "start_date",
+                "end_date"
             ],
             "properties": {
-                "student_id": {
+                "course_id": {
+                    "bsonType": "string"
+                },
+                "title": {
+                    "bsonType": "string"
+                },
+                "description": {
+                    "bsonType": "string"
+                },
+                "level": {
+                    "bsonType": "string",
+                    "enum": [
+                        "Beginner",
+                        "Intermediate",
+                        "Advanced"
+                    ]
+                },
+                "instructor_id": {
+                    "bsonType": "string"
+                },
+                "start_date": {
+                    "bsonType": "string"
+                },
+                "end_date": {
+                    "bsonType": "string"
+                },
+                "tags": {
+                    "bsonType": "array",
+                    "items": {
+                        "bsonType": "string"
+                    }
+                }
+            }
+        }
+    },
+    "instructors": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "required": [
+                "instructor_id",
+                "name",
+                "email"
+            ],
+            "properties": {
+                "instructor_id": {
                     "bsonType": "string"
                 },
                 "name": {
@@ -20,27 +65,56 @@
                     "bsonType": "string",
                     "pattern": "^.+@.+$"
                 },
-                "joined_on": {
-                    "bsonType": "string",
-                    "description": "Must be a date in YYYY-MM-DD format"
+                "specialization": {
+                    "bsonType": "array",
+                    "items": {
+                        "bsonType": "string"
+                    }
+                },
+                "courses": {
+                    "bsonType": "array",
+                    "items": {
+                        "bsonType": "string"
+                    }
+                }
+            }
+        }
+    },
+    "enrollments": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "required": [
+                "student_id",
+                "course_id",
+                "enrolled_on",
+                "status"
+            ],
+            "properties": {
+                "student_id": {
+                    "bsonType": "string"
+                },
+                "course_id": {
+                    "bsonType": "string"
+                },
+                "enrolled_on": {
+                    "bsonType": "string"
                 },
                 "status": {
+                    "bsonType": "string",
                     "enum": [
-                        "active",
-                        "inactive",
-                        "suspended"
+                        "ongoing",
+                        "completed",
+                        "dropped"
                     ]
                 },
-                "profile": {
-                    "bsonType": "object",
-                    "properties": {
-                        "bio": {
-                            "bsonType": "string"
-                        },
-                        "location": {
-                            "bsonType": "string"
-                        }
-                    }
+                "progress": {
+                    "bsonType": "int"
+                },
+                "grade": {
+                    "bsonType": [
+                        "int",
+                        "null"
+                    ]
                 }
             }
         }
