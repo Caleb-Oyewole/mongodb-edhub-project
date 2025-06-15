@@ -1,0 +1,48 @@
+{
+    "students_schema": {
+        "$jsonSchema": {
+            "bsonType": "object",
+            "required": [
+                "student_id",
+                "name",
+                "email",
+                "joined_on",
+                "status"
+            ],
+            "properties": {
+                "student_id": {
+                    "bsonType": "string"
+                },
+                "name": {
+                    "bsonType": "string"
+                },
+                "email": {
+                    "bsonType": "string",
+                    "pattern": "^.+@.+$"
+                },
+                "joined_on": {
+                    "bsonType": "string",
+                    "description": "Must be a date in YYYY-MM-DD format"
+                },
+                "status": {
+                    "enum": [
+                        "active",
+                        "inactive",
+                        "suspended"
+                    ]
+                },
+                "profile": {
+                    "bsonType": "object",
+                    "properties": {
+                        "bio": {
+                            "bsonType": "string"
+                        },
+                        "location": {
+                            "bsonType": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
